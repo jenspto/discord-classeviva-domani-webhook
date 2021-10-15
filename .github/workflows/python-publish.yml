@@ -10,7 +10,7 @@ name: Send homework for tomorrow
 
 on:
   schedule:
-    - cron: "45 18 * * *"
+    - cron: "55 18 * * *"
 
 jobs:
   deploy:
@@ -26,7 +26,7 @@ jobs:
     - name: Install dependencies
       run: |
         python -m pip install --upgrade pip
-        pip install requirements.txt
+        pip install -r requirements.txt
     - name: Execute script
       env: 
           PASSWORD: ${{ secrets.PASSWORD }}
