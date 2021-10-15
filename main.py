@@ -14,13 +14,13 @@ DISCORD_WEBHOOK_URL= getenv('DISCORD_WEBHOOK_URL')
 # Definisci date di oggi e domani, per i compiti
 
 oggi = datetime.date.today()
+domani = oggi + datetime.timedelta(days=1)
 if oggi.weekday() == 6: # Se è sabato il bot elencherà i compiti per la prossima settimana.
-    domani = oggi + datetime.timedelta(days=7)
+    dopodomani = domani + datetime.timedelta(days=7)
     target = 'la prossima settimana'
 else:
-    domani = oggi + datetime.timedelta(days=1)
+    dopodomani = domani + datetime.timedelta(days=1)
     target = 'domani'
-dopodomani = domani + datetime.timedelta(days=1)
 
 # Accesso a classeviva
 
