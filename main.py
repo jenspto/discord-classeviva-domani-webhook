@@ -9,7 +9,7 @@ import classeviva
 load_dotenv()
 USERNAME= getenv('USERNAME')
 PASSWORD= getenv('PASSWORD')
-DISCORD_WEBHOOK_URL= getenv('WEBHOOK_URL')
+DISCORD_WEBHOOK_URL= getenv('DISCORD_WEBHOOK_URL')
 
 # Definisci date di oggi e domani, per i compiti
 
