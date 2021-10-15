@@ -14,10 +14,12 @@ DISCORD_WEBHOOK_URL= getenv('DISCORD_WEBHOOK_URL')
 # Definisci date di oggi e domani, per i compiti
 
 oggi = datetime.date.today()
-if oggi.weekday() == 6: # Se è sabato il prossimo giorno con cui il bot dirà i compiti sarà Domenica.
-    domani = oggi + datetime.timedelta(days=2)
+if oggi.weekday() == 6: # Se è sabato il bot elencherà i compiti per la prossima settimana.
+    domani = oggi + datetime.timedelta(days=7)
+    target = 'la prossima settimana'
 else:
     domani = oggi + datetime.timedelta(days=1)
+    target = 'domani'
 dopodomani = domani + datetime.timedelta(days=4)
 
 # Accesso a classeviva
@@ -38,7 +40,7 @@ ora_compiti_str = ora_compiti.strftime('%H:%M')
 # Lista con i messaggi che il bot invierà
 
 messaggi = []
-messaggi.append(f'📆 Compiti ed annotazioni per domani ({domani.strftime("%d/%m")}), estratti alle {ora_compiti_str}\n----------------------------------------\n')
+messaggi.append(f'📆 Compiti ed annotazioni per {target} ({domani.strftime("%d/%m")}), estratti alle {ora_compiti_str}\n----------------------------------------\n')
 messaggio_compiti = []
 for nota in compiti_list:
     compito_emoji = "▫️" if nota['evtCode'] == "AGNT" else "🔸"
