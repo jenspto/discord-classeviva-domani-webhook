@@ -20,7 +20,7 @@ if oggi.weekday() == 6: # Se è sabato il bot elencherà i compiti per la prossi
 else:
     domani = oggi + datetime.timedelta(days=1)
     target = 'domani'
-dopodomani = domani + datetime.timedelta(days=4)
+dopodomani = domani + datetime.timedelta(days=1)
 
 # Accesso a classeviva
 
