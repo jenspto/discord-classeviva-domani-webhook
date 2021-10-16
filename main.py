@@ -32,7 +32,6 @@ registro.login(USERNAME,PASSWORD)
 compiti = registro.agenda(domani,dopodomani)
 compiti_json = json.loads(json.dumps(compiti))
 compiti_list = compiti_json['agenda']
-print(compiti_list)
 # Ora, minuti e secondi in cui sono stati estratti i compiti
 ora_compiti = datetime.datetime.now()
 ora_compiti_str = ora_compiti.strftime('%H:%M')
