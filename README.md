@@ -1,4 +1,4 @@
-[![Send homework for tomorrow](https://github.com/bortox/discord-classeviva-domani-webhook/actions/workflows/python-publish.yml/badge.svg)](https://github.com/bortox/discord-classeviva-domani-webhook/actions/workflows/python-publish.yml)
+![Send homework for tomorrow GH Action badge](https://github.com/bortox/discord-classeviva-domani-webhook/actions/workflows/send-homework.yml/badge.svg)](https://github.com/bortox/discord-classeviva-domani-webhook/actions/workflows/send-homework.yml)
 
 # discord-classeviva-domani-webhook
 
