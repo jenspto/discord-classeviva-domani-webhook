@@ -3,7 +3,7 @@
 import json,datetime
 from dotenv import load_dotenv
 from os import getenv
-from discord_webhook import DiscordWebhook
+from discord_webhook import DiscordWebhook, DiscordEmbed
 import classeviva
 # Caricamento delle variabili private dal file .env, se esiste.
 load_dotenv()
@@ -15,7 +15,7 @@ DISCORD_WEBHOOK_URL= getenv('DISCORD_WEBHOOK_URL')
 
 oggi = datetime.date.today()
 domani = oggi + datetime.timedelta(days=1)
-if oggi.weekday() == 6: # Se è sabato il bot elencherà i compiti per la prossima settimana.
+if oggi.weekday() == 5: # Se è sabato il bot elencherà i compiti per la prossima settimana.
     dopodomani = domani + datetime.timedelta(days=7)
     target = 'la prossima settimana'
 else:
@@ -36,24 +36,26 @@ compiti_list = compiti_json['agenda']
 ora_compiti = datetime.datetime.now()
 ora_compiti_str = ora_compiti.strftime('%H:%M')
 
-# Lista con i messaggi che il bot invierà
-
-messaggi = []
-messaggi.append(f'📆 Compiti ed annotazioni per {target} ({domani.strftime("%d/%m")}), estratti alle {ora_compiti_str}\n----------------------------------------\n')
-messaggio_compiti = []
+# Crea webhook
+messaggio = f'✏️ Compiti ed annotazioni per {target} ({domani.strftime("%d/%m")}-{dopodomani.strftime("%d/%m")})'
+webhook = DiscordWebhook(url=DISCORD_WEBHOOK_URL, username=messaggio)
+n_embeds = 0
 for nota in compiti_list:
-    compito_emoji = "▫️" if nota['evtCode'] == "AGNT" else "🔸"
-    datetime_object = datetime.datetime.fromisoformat(nota['evtDatetimeBegin'])
-    if datetime_object.hour != 0:
-        strtime = datetime_object.strftime('%d/%m (%H:%M)')
-    else:
-        strtime = datetime_object.strftime('%d/%m')
-    messaggio_compiti.append('🗣️ ' + nota['authorName'].title() + '\n' +  '⌛ ' + strtime + '\n' + compito_emoji +' ' + nota['notes'])
-b = registro.lessons(oggi,oggi)
-messaggi.append('\n-------------\n'.join(messaggio_compiti))
-for messaggio in messaggi: #Invia ogni messaggio
-    webhook = DiscordWebhook(url=DISCORD_WEBHOOK_URL, content=messaggio)
-    response = webhook.execute()
-    pass
+    compito_ora = datetime.datetime.fromisoformat(nota['evtDatetimeBegin']).timestamp()
+    compito_color = "0000ff" if nota['evtCode'] == "AGNT" else "ff00ff"
+    embed = DiscordEmbed(
+        title=nota['notes'],
+        color=compito_color
+    )
+    embed.set_image(url='https://raw.githubusercontent.com/bortox/discord-classeviva-domani-webhook/main/line.png')
+    embed.set_timestamp(compito_ora)
+    embed.set_author(name=nota['authorName'].title())
+    embed.set_footer(text=nota['classDesc'])
+    if n_embeds % 10 == 0 and n_embeds > 0:
+        print(nota['notes'])
+        response = webhook.execute(remove_embeds=True)
+    webhook.add_embed(embed)
+    n_embeds += 1
 
+response = webhook.execute()
 print('All done! Homeworks updated!')
