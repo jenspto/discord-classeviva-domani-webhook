@@ -10,7 +10,7 @@ name: Send homework for tomorrow
 
 on:
   schedule:
-    - cron: "42 12 * * *"
+    - cron: "30 12 * * *"
 
 jobs:
   deploy:
