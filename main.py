@@ -52,7 +52,6 @@ for nota in compiti_list:
     embed.set_author(name=nota['authorName'].title())
     embed.set_footer(text=nota['classDesc'])
     if n_embeds % 10 == 0 and n_embeds > 0:
-        print(nota['notes'])
         response = webhook.execute(remove_embeds=True)
     webhook.add_embed(embed)
     n_embeds += 1
