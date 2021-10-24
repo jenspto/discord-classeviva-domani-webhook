@@ -1,6 +1,6 @@
 # Webhook Discord con compiti Classeviva
 
-Invia ogni giorno ad un'ora impostata (in questo caso 14:30, modificabile nel file [send-homework.yml](/.github/workflows/send-homework.yml) in un dato canale la lista dei compiti sul Registro Elettronico Classeviva per il giorno seguente, come **embed** Discord.
+Invia ogni giorno ad un'ora impostata (in questo caso 14:30, modificabile nel file [send-homework.yml](/.github/workflows/send-homework.yml) in un dato canale la lista dei compiti sul Registro Elettronico Classeviva per il giorno seguente, come messaggio su Discord contenente i compiti come **embeds** grazie ad uno webhook.
 
 ![Send homework for tomorrow GH Action badge](https://github.com/bortox/discord-classeviva-domani-webhook/actions/workflows/send-homework.yml/badge.svg)
 
