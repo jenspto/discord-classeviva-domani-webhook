@@ -22,6 +22,16 @@ else:
     dopodomani = domani + datetime.timedelta(days=1)
     target = 'domani'
 
+# Funzione per troncare il titolo a 255 caratteri e restituire una descrizione
+
+def smart_truncate(content, length, suffix='...'):
+    if len(content) <= length: # Se il titolo del compito ha meno di 255 caratteri, non ritornare una descrizione
+        return content,''
+    else: # Se il titolo ha più di 255 caratteri, ritorna titolo del compito tagliato all'ultima parola prima di arrivare a 255 caratteri, con la continuazione del compito come descrizione
+        title = ' '.join(content[:length+1].split(' ')[0:-1])
+        description = content[len(title):]
+        return title + suffix, suffix + description
+
 # Accesso a classeviva
 
 registro = classeviva.Session()
@@ -43,8 +53,10 @@ n_embeds = 0
 for nota in compiti_list:
     compito_ora = datetime.datetime.fromisoformat(nota['evtDatetimeBegin']).timestamp()
     compito_color = "0000ff" if nota['evtCode'] == "AGNT" else "ff00ff"
+    title,description = smart_truncate(nota['notes'],250)
     embed = DiscordEmbed(
-        title=nota['notes'],
+        title=title,
+        description=description,
         color=compito_color
     )
     embed.set_image(url='https://raw.githubusercontent.com/bortox/discord-classeviva-domani-webhook/main/line.png')
