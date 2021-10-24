@@ -48,9 +48,8 @@ ora_compiti_str = ora_compiti.strftime('%H:%M')
 
 # Crea webhook
 messaggio = f'✏️ Compiti ed annotazioni per {target} ({domani.strftime("%d/%m")}-{dopodomani.strftime("%d/%m")})'
-webhook = DiscordWebhook(url=DISCORD_WEBHOOK_URL, username=messaggio)
-n_embeds = 0
-for nota in compiti_list:
+webhook = DiscordWebhook(url=DISCORD_WEBHOOK_URL, username=messaggio, rate_limit_retry=True)
+for numero_nota,nota in enumerate(compiti_list,start=1):
     compito_ora = datetime.datetime.fromisoformat(nota['evtDatetimeBegin']).timestamp()
     compito_color = "0000ff" if nota['evtCode'] == "AGNT" else "ff00ff"
     title,description = smart_truncate(nota['notes'],250)
@@ -67,7 +66,6 @@ for nota in compiti_list:
         print(nota['notes'])
         response = webhook.execute(remove_embeds=True)
     webhook.add_embed(embed)
-    n_embeds += 1
-
-response = webhook.execute()
+    if numero_nota % 10 == 0:  # Ogni 10 embed, massimo consentito da Discord, viene inviato lo webhook. Meglio inviare uno webhook con 10 embed che 10 webhook con 1 embed l'uno, col rischio di avere un rate limiting di 5 minuti.
+        response = webhook.execute(remove_embeds=True)
 print('All done! Homeworks updated!')
