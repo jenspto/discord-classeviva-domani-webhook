@@ -42,6 +42,11 @@ registro.login(USERNAME,PASSWORD)
 compiti = registro.agenda(domani,dopodomani)
 compiti_json = json.loads(json.dumps(compiti))
 compiti_list = compiti_json['agenda']
+
+# Ordina cronologicamente ogni compito e nota dall'ora di inizio dell'evento
+
+compiti_list = sorted(compiti_list, key=lambda x:datetime.datetime.fromisoformat(x['evtDatetimeBegin']).timestamp())
+
 # Ora, minuti e secondi in cui sono stati estratti i compiti
 ora_compiti = datetime.datetime.now()
 ora_compiti_str = ora_compiti.strftime('%H:%M')
