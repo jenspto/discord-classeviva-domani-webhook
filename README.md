@@ -1,12 +1,26 @@
+# Webhook Discord con compiti Classeviva
+
+Invia ogni giorno ad un'ora impostata (in questo caso 14:30, modificabile nel file [send-homework.yml](/.github/workflows/send-homework.yml) in un dato canale la lista dei compiti sul Registro Elettronico Classeviva per il giorno seguente, come **embed** Discord.
+
 ![Send homework for tomorrow GH Action badge](https://github.com/bortox/discord-classeviva-domani-webhook/actions/workflows/send-homework.yml/badge.svg)
 
 
-# discord-classeviva-domani-webhook
+Questo Webhook sfrutta [ClassevivaAPI](https://github.com/MarcoBuster/ClasseVivaAPI ) di [@MarcoBuster](https://github.com/MarcoBuster)
+
+## Feature:
+
+* Compiti inviati in ordine cronologico
+* Se è Sabato, invia i compiti per la prossima settimana
+* Username e Password di Classeviva, ed anche l'url dello Webhook, sono conservati come [ENCRYPTED SECRETS](https://docs.github.com/en/actions/security-guides/encrypted-secrets) nella repo, in modo sicuro.
+* Orario d'invio dei compiti personalizzabile facilmente
+* Riprova ad inviare il messaggio se trova rate-limiting da Discord, grazie al modulo discord-webhook che ha reso tutto più semplice.
+
+
+
 
 ![Foto per presentare il prodotto](/cover.png)
-Compiti per domani con uno webhook di Discord che scannerizza attraverso l'API di classeviva i compiti.
 
-## Come utilizzare lo webhook
+## Come utilizzare lo webhook, forkando la repo
 
 * 1) Per prima cosa, puoi **forkare la repo**
 
