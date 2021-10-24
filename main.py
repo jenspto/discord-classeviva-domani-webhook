@@ -68,6 +68,7 @@ for numero_nota,nota in enumerate(compiti_list,start=1):
     embed.set_author(name=nota['authorName'].title())
     embed.set_footer(text=nota['classDesc'])
     webhook.add_embed(embed)
-    if numero_nota % 10 == 0:  # Ogni 10 embed, massimo consentito da Discord, viene inviato lo webhook. Meglio inviare uno webhook con 10 embed che 10 webhook con 1 embed l'uno, col rischio di avere un rate limiting di 5 minuti.
+    if numero_nota % 10 == 0:  # Ogni 10 embed (se il resto della divisione tra numero nota e 10 è zero) , massimo consentito da Discord, viene inviato lo webhook. Meglio inviare uno webhook con 10 embed che 10 webhook con 1 embed l'uno, col rischio di avere un rate limiting di 5 minuti.
         response = webhook.execute(remove_embeds=True)
+response = webhook.execute(remove_embeds=True) # Invia gli embed rimanenti, se ce ne sono.
 print('All done! Homeworks updated!')
