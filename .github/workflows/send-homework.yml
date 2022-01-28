@@ -9,6 +9,7 @@
 name: Send homework for tomorrow
 
 on:
+  workflow_dispatch:
   schedule:
     - cron: "30 12 * * *"
 
