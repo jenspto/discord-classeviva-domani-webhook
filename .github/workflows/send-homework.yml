@@ -7,7 +7,7 @@
 # documentation.
 
 name: Send homework for tomorrow
-
+runs-on: [self-hosted, linux]
 on:
   workflow_dispatch:
   schedule:
