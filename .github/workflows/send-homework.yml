@@ -6,8 +6,9 @@
 # separate terms of service, privacy policy, and support
 # documentation.
 
+runs-on: [self-hosted]
 name: Send homework for tomorrow
-runs-on: [self-hosted, linux]
+
 on:
   workflow_dispatch:
   schedule:
