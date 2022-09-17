@@ -12,12 +12,12 @@ name: Send homework for tomorrow
 on:
   workflow_dispatch:
   schedule:
-    - cron: "30 12 * * *"
+    - cron: "30 14 * * *"
 
 jobs:
   deploy:
 
-    runs-on: self-hosted
+    runs-on: ubuntu-latest
 
     steps:
     - uses: actions/checkout@v2
