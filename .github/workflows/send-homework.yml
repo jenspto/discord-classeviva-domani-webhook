@@ -10,6 +10,9 @@
 name: Send homework for tomorrow
 
 on:
+  push:
+    branches:
+      - main
   workflow_dispatch:
   schedule:
     - cron: "30 14 * * *"
